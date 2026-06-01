@@ -12,7 +12,8 @@ passer de 20 MHz à 1,25 MHz.
 
 .. toctree::
    :maxdepth: 2
-   :numbered:
+   :caption: Contents:
+   :hidden:
 
    01_introduction
    02_syntaxe
