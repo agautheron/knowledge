@@ -115,9 +115,11 @@ $\Phi_x(\mathbf{r}')$ pour $z' < 0$, ce qui n'est pas défini par le problème p
    Plus précisément, en substituant $G_m = G_m^\infty - G_m^\infty(\cdot,\bar{\mathbf{r}}')$
    et en développant le produit avec $\Phi_x$, on obtient quatre intégrales de la forme :
 
-   $$I_{ij} = \int_0^\infty\!\!\int_{\mathbb{R}^2}
-   \frac{e^{-|\mathbf{r}-\mathbf{r}'|_i/\delta_m}}{|\mathbf{r}-\mathbf{r}'|_i}\,
-   \frac{e^{-|\mathbf{r}'-\mathbf{r}_j|/\delta_x}}{|\mathbf{r}'-\mathbf{r}_j|}\,d^3r'$$
+   
+	.. math::
+		I_{ij} = \int_0^\infty\!\!\int_{\mathbb{R}^2}
+		\frac{e^{-|\mathbf{r}-\mathbf{r}'|_i/\delta_m}}{|\mathbf{r}-\mathbf{r}'|_i}\,
+		\frac{e^{-|\mathbf{r}'-\mathbf{r}_j|/\delta_x}}{|\mathbf{r}'-\mathbf{r}_j|}\,d^3r'
 
    avec $(i,j) \in \{+,-\}\times\{+,-\}$ et $z'$ borné à $[0,+\infty)$.
    L'intégration transverse sur $(\rho',\phi')$ se fait analytiquement par transformée
@@ -136,7 +138,7 @@ $\rho$, le produit de convolution transverse se factorise et l'on obtient l'int�
 	= \frac{\eta\,\mu_{af}}{D_m}\int_0^\infty
 	  \tilde{G}_m(s_r,z,z')\,\tilde{\Phi}_x(s_r,z')\,dz'
 
-avec $\tilde{G}_m(s_r,z,z') = \dfrac{e^{-\alpha_m|z-z'|}-e^{-\alpha_m(z+z'+2z_{bm})}}{2\alpha_m D_m}$,
+avec :math:`\tilde{G}_m(s_r,z,z') = \dfrac{e^{-\alpha_m|z-z'|}-e^{-\alpha_m(z+z'+2z_{bm})}}{2\alpha_m D_m}`,
 $\alpha_m = \sqrt{s_r^2+1/\delta_m^2}$, et $\tilde{\Phi}_x(s_r,z')$ donné par
 :doc:`08_da_2d_kienle_sans_fluo`.
 
