@@ -7,7 +7,7 @@ Cours — RT Models
    :hidden:
    :caption: Cours disponibles
 
-   transfert_radiatif
+   transfert_radiatif/index
    verilog_fpga/index
 
 .. toctree::
