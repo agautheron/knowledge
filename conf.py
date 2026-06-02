@@ -48,7 +48,7 @@ COURSES = {
     # slug (= préfixe exact du chemin Sphinx) : (label, chemin de l'index)
     "transfert_radiatif": (
         "Transfert Radiatif",
-        "transfert_radiatif",       # fichier à la racine, pas de sous-dossier
+        "transfert_radiatif/index",
     ),
     "verilog_fpga": (
         "Verilog / FPGA",
