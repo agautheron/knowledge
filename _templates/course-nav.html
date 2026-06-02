@@ -1,0 +1,35 @@
+{#
+  _templates/course-nav.html
+  ─────────────────────────────────────────────────────────────────────────
+  Sidebar furo : navigation contextuelle par cours.
+
+  Variables injectées par conf.py (_html_page_context) :
+    current_course  — slug du cours courant (str | None)
+    course_labels   — dict slug → label affiché dans l'onglet
+    course_roots    — dict slug → chemin Sphinx de l'index du cours
+
+  Comportement :
+    • Toujours : deux onglets « Transfert Radiatif » / « Verilog / FPGA ».
+      L'onglet du cours courant est surligné.
+    • Si la page appartient à un cours : toctree local de ce cours
+      (arbre complet, page courante mise en évidence par furo).
+    • Page d'accueil (index racine) : onglets seuls, sans arbre.
+  ─────────────────────────────────────────────────────────────────────────
+#}
+
+<nav class="course-tabs" aria-label="Cours disponibles">
+  {%- for slug, label in course_labels.items() %}
+  <a href="{{ pathto(course_roots[slug]) }}"
+     class="course-tab course-tab--{{ slug | replace('_', '-') }}
+            {%- if slug == current_course %} course-tab--active{% endif %}"
+     {% if slug == current_course %}aria-current="true"{% endif %}>
+    {{- label -}}
+  </a>
+  {%- endfor %}
+</nav>
+
+{%- if current_course %}
+<div class="course-toctree" data-course="{{ current_course }}">
+  {{ toctree(maxdepth=4, collapse=True, includehidden=False) }}
+</div>
+{%- endif %}

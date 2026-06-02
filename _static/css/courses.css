@@ -1,0 +1,271 @@
+/*
+ * _static/css/courses.css
+ * ════════════════════════════════════════════════════════════════════════
+ * 1. Grille de cartes — page d'accueil  (.course-grid / .course-card)
+ * 2. Onglets sidebar  (.course-tabs / .course-tab)
+ * 3. Arbre local      (.course-toctree)
+ *
+ * Deux cours, deux couleurs :
+ *   Transfert Radiatif → bleu-violet  (physique théorique)
+ *   Verilog / FPGA     → orange-ambre (électronique numérique)
+ *
+ * Compatible furo clair et sombre via [data-theme="dark"].
+ * ════════════════════════════════════════════════════════════════════════
+ */
+
+
+/* ── Tokens de couleur ───────────────────────────────────────────────── */
+
+:root {
+  --rt-hue:           248;          /* bleu-violet */
+  --rt-accent:        hsl(var(--rt-hue), 62%, 48%);
+  --rt-accent-dark:   hsl(var(--rt-hue), 62%, 36%);
+  --rt-bg:            hsl(var(--rt-hue), 55%, 96%);
+
+  --fpga-hue:         32;           /* orange-ambre */
+  --fpga-accent:      hsl(var(--fpga-hue), 90%, 40%);
+  --fpga-accent-dark: hsl(var(--fpga-hue), 90%, 28%);
+  --fpga-bg:          hsl(var(--fpga-hue), 90%, 95%);
+}
+
+[data-theme="dark"] {
+  --rt-accent:        hsl(var(--rt-hue), 70%, 68%);
+  --rt-accent-dark:   hsl(var(--rt-hue), 70%, 80%);
+  --rt-bg:            hsl(var(--rt-hue), 25%, 16%);
+
+  --fpga-accent:      hsl(var(--fpga-hue), 85%, 60%);
+  --fpga-accent-dark: hsl(var(--fpga-hue), 85%, 75%);
+  --fpga-bg:          hsl(var(--fpga-hue), 30%, 15%);
+}
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   1. Grille de cartes — page d'accueil
+   ════════════════════════════════════════════════════════════════════════ */
+
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 2.5rem 0 3rem;
+}
+
+.course-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  border: 1px solid var(--color-background-border);
+  overflow: hidden;
+  text-decoration: none !important;
+  color: inherit;
+  background: var(--color-background-primary);
+  transition: box-shadow .2s ease, transform .15s ease;
+}
+
+.course-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, .12);
+  text-decoration: none !important;
+}
+
+/* Bandeau coloré en haut de la carte */
+.course-card__header {
+  padding: .65rem 1.1rem;
+  display: flex;
+  align-items: center;
+}
+
+.course-card__header--rt {
+  background: var(--rt-accent);
+}
+
+.course-card__header--fpga {
+  background: var(--fpga-accent);
+}
+
+.course-card__badge {
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(0,0,0,.18);
+  padding: 2px 9px;
+  border-radius: 99px;
+}
+
+/* Corps de la carte */
+.course-card__body {
+  padding: 1.2rem 1.3rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: .55rem;
+  flex: 1;
+}
+
+.course-card__title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--color-foreground-primary);
+  /* reset Sphinx h2 margins */
+  border: none;
+  padding: 0;
+}
+
+.course-card__desc {
+  font-size: .9rem;
+  color: var(--color-foreground-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.course-card__topics {
+  list-style: none;
+  padding: 0;
+  margin: .2rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+}
+
+.course-card__topics li {
+  font-size: .82rem;
+  color: var(--color-foreground-muted);
+  padding-left: 1rem;
+  position: relative;
+}
+
+.course-card__topics li::before {
+  content: "›";
+  position: absolute;
+  left: 0;
+  color: var(--color-foreground-border);
+}
+
+.course-card:hover .course-card--rt .course-card__topics li::before,
+.course-card__header--rt ~ .course-card__body .course-card__topics li::before {
+  color: var(--rt-accent);
+}
+
+.course-card__header--fpga ~ .course-card__body .course-card__topics li::before {
+  color: var(--fpga-accent);
+}
+
+.course-card__cta {
+  margin-top: auto;
+  padding-top: .7rem;
+  font-size: .85rem;
+  font-weight: 600;
+}
+
+.course-card__header--rt ~ .course-card__body .course-card__cta {
+  color: var(--rt-accent);
+}
+
+.course-card__header--fpga ~ .course-card__body .course-card__cta {
+  color: var(--fpga-accent);
+}
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   2. Onglets sidebar  (.course-tabs / .course-tab)
+   ════════════════════════════════════════════════════════════════════════ */
+
+.course-tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin: .75rem 0 .5rem;
+  padding-bottom: .6rem;
+  border-bottom: 1px solid var(--color-background-border);
+}
+
+.course-tab {
+  display: block;
+  padding: 5px 10px 5px 11px;
+  border-radius: 5px;
+  border-left: 3px solid transparent;
+  font-size: var(--font-size--small, .8rem);
+  font-weight: 500;
+  text-decoration: none !important;
+  color: var(--color-foreground-secondary);
+  transition: background .15s, border-color .15s, color .15s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.course-tab:hover {
+  background: var(--color-background-hover);
+  color: var(--color-foreground-primary);
+  text-decoration: none !important;
+}
+
+/* Onglet Transfert Radiatif */
+.course-tab--transfert-radiatif:hover {
+  border-left-color: var(--rt-accent);
+}
+
+.course-tab--transfert-radiatif.course-tab--active {
+  border-left-color: var(--rt-accent);
+  background: var(--rt-bg);
+  color: var(--rt-accent-dark);
+  font-weight: 600;
+}
+
+/* Onglet Verilog / FPGA */
+.course-tab--verilog-fpga:hover {
+  border-left-color: var(--fpga-accent);
+}
+
+.course-tab--verilog-fpga.course-tab--active {
+  border-left-color: var(--fpga-accent);
+  background: var(--fpga-bg);
+  color: var(--fpga-accent-dark);
+  font-weight: 600;
+}
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   3. Arbre local  (.course-toctree)
+   ════════════════════════════════════════════════════════════════════════ */
+
+.course-toctree {
+  margin-top: .4rem;
+}
+
+.course-toctree .toc-tree {
+  font-size: var(--font-size--small, .8rem);
+}
+
+/* Lien survolé : couleur d'accent du cours */
+.course-toctree[data-course="transfert_radiatif"] a:hover {
+  color: var(--rt-accent);
+}
+
+.course-toctree[data-course="verilog_fpga"] a:hover {
+  color: var(--fpga-accent);
+}
+
+/* Page courante dans l'arbre */
+.course-toctree[data-course="transfert_radiatif"] .current > a {
+  color: var(--rt-accent-dark) !important;
+  font-weight: 600;
+}
+
+.course-toctree[data-course="verilog_fpga"] .current > a {
+  color: var(--fpga-accent-dark) !important;
+  font-weight: 600;
+}
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   4. Responsive
+   ════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 500px) {
+  .course-grid {
+    grid-template-columns: 1fr;
+  }
+}
