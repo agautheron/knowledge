@@ -20,7 +20,7 @@ Cours — RT Models
 
    <div class="course-grid">
 
-     <a class="course-card" href="transfert_radiatif.html">
+     <a class="course-card" href="transfert_radiatif/index.html">
        <div class="course-card__header course-card__header--rt">
          <span class="course-card__badge">Physique</span>
        </div>
