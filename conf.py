@@ -81,9 +81,8 @@ def setup(app):
 # Sidebar furo : notre template remplace "sidebar-nav-bs.html"
 html_sidebars = {
     "**": [
-       "navigation.html",
+       "sidebar/navigation.html",
 #        "search-field.html",
         "course-nav.html",           # navigation contextuelle par cours
-       "ethical-ads.html",
     ]
 }
