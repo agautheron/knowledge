@@ -174,7 +174,8 @@ $$R_m(\rho) = \left.-D_m\,\frac{\partial\Phi_m}{\partial z}\right|_{z=0}
 
 **Contribution diffuse** (calcul par transformée de Hankel inverse, voir :doc:`09_da_2d_kienle_avec_fluo`) :
 
-$$R_m^\text{diff}(\rho) = \frac{1}{2\pi}\int_0^\infty \tilde{R}_m^\text{diff}(s_r)\,J_0(s_r\rho)\,s_r\,ds_r$$
+.. math::
+	R_m^\text{diff}(\rho) = \frac{1}{2\pi}\int_0^\infty \tilde{R}_m^\text{diff}(s_r)\,J_0(s_r\rho)\,s_r\,ds_r
 
 C'est la grandeur inversée en FDOT pour reconstruire $\mu_{af}(\mathbf{r})$.
 
