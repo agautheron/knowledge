@@ -2,14 +2,14 @@ Modèles de Transfert Radiatif
 ==============================
 
 .. toctree::
-   :maxdepth: 1
+   :hidden:
    :caption: Bases
 
    base/01_etablissement_etr
    base/02_fluorescence_etr
 
 .. toctree::
-   :maxdepth: 1
+   :hidden:
    :caption: Résolution Approchée
 
    da/03_approximation_diffusion
@@ -21,7 +21,7 @@ Modèles de Transfert Radiatif
    da/09_da_2d_kienle_avec_fluo
 
 .. toctree::
-   :maxdepth: 1
+   :hidden:
    :caption: Résolution Exacte
 
    dom/10_dom_1d_sans_fluo

@@ -16,9 +16,14 @@ exclude_patterns = ["_build"]
 html_static_path = ["_static"]
 html_extra_path  = []
 
-html_title       = "Radiative Transfer Models"
+html_title       = "Knowledge"
 html_theme       = "furo"
 html_show_sphinx = False
+
+html_theme_options = {
+    "sidebar_hide_name": False,
+    # Furo gère l'accordéon nativement, rien à ajouter
+}
 
 html_css_files = [
     "css/style.css",
@@ -83,6 +88,6 @@ html_sidebars = {
     "**": [
        "sidebar/navigation.html",
 #        "search-field.html",
-        "course-nav.html",           # navigation contextuelle par cours
+#        "course-nav.html",           # navigation contextuelle par cours
     ]
 }

@@ -7,6 +7,7 @@ Cours — RT Models
    :hidden:
    :caption: Cours disponibles
 
+   Accueil <self>
    transfert_radiatif/index
    verilog_fpga/index
 
