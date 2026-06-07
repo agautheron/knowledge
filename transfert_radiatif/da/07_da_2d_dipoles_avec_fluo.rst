@@ -198,7 +198,10 @@ En dérivant terme à terme l'intégrale azimutale de $\mathcal{G}_m$, avec
 
 .. math::
 
-	\frac{\partial R_\pm}{\partial z}\bigg|_{z=0} = \frac{z \mp z_0}_{\text{signe}}{\big/R_\pm}\bigg|_{z=0}	= \begin{cases}-z_0/R_+ \\ +(z_0+2z_{bm})/R_-\end{cases}
+	\frac{\partial R_+}{\partial z}\bigg|_{z=0}
+	= \frac{z - z_0}{R_+}\bigg|_{z=0} = \frac{-z_0}{R_+}, \qquad
+	\frac{\partial R_-}{\partial z}\bigg|_{z=0}
+	= \frac{z + z_0 + 2z_{bm}}{R_-}\bigg|_{z=0} = \frac{z_0+2z_{bm}}{R_-}
 
 et $\partial_z(e^{-R/\delta}/R) = (\partial_z R)(-1/\delta-1/R)(e^{-R/\delta}/R)$, on obtient :
 
