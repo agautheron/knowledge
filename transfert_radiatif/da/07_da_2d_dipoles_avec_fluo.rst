@@ -196,14 +196,12 @@ $$R_m^\text{diff}(\rho) = \eta\,\mu_{af}
 Le noyau $\mathcal{K}_m$ est la dérivée en $z=0$ de la Green cylindrique.
 En dérivant terme à terme l'intégrale azimutale de $\mathcal{G}_m$, avec
 
-.. math::
+$$\frac{\partial R_+}{\partial z}\bigg|_{z=0}
+= \frac{z - z_0}{R_+}\bigg|_{z=0} = \frac{-z_0}{R_+}, \qquad
+\frac{\partial R_-}{\partial z}\bigg|_{z=0}
+= \frac{z + z_0 + 2z_{bm}}{R_-}\bigg|_{z=0} = \frac{z_0+2z_{bm}}{R_-}$$
 
-	\frac{\partial R_+}{\partial z}\bigg|_{z=0}
-	= \frac{z - z_0}{R_+}\bigg|_{z=0} = \frac{-z_0}{R_+}, \qquad
-	\frac{\partial R_-}{\partial z}\bigg|_{z=0}
-	= \frac{z + z_0 + 2z_{bm}}{R_-}\bigg|_{z=0} = \frac{z_0+2z_{bm}}{R_-}
-
-et $\partial_z(e^{-R/\delta}/R) = (\partial_z R)(-1/\delta-1/R)(e^{-R/\delta}/R)$, on obtient :
+et $\dfrac{\partial}{\partial z}\dfrac{e^{-R/\delta}}{R} = \dfrac{\partial R}{\partial z}\left(-\dfrac{1}{\delta R}-\dfrac{1}{R^2}\right)e^{-R/\delta}$, on obtient :
 
 .. math::
 
