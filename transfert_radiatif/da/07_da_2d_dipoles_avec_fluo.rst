@@ -24,13 +24,13 @@ $\delta_x = \sqrt{D_x/\mu_{ax}^\text{tot}}$, $z_{0x} = 1/\mu_{tx}$.
 **Émission (CW) :**
 
 $$-D_m\,\nabla^2\Phi_m + \mu_{am}\,\Phi_m
-= \eta\,\mu_{af}\!\left[\Phi_x(\mathbf{r}) + F_0\,e^{-\mu_{tx} z}\,\delta^{(2)}(\boldsymbol{\rho})\right]$$
+= \eta\,\mu_{af}\!\left[\Phi_x(\rho,z) + F_0\,e^{-\mu_{tx} z}\,\delta^{(2)}(\boldsymbol{\rho})\right]$$
 
 avec $D_m = 1/[3(\mu_{am}+\mu_{sm}')]$, $\delta_m = \sqrt{D_m/\mu_{am}}$.
 
 Le terme source comprend deux contributions :
 
-- $\eta\,\mu_{af}\,\Phi_x(\mathbf{r})$ — excitation par les photons **diffus**
+- $\eta\,\mu_{af}\,\Phi_x(\rho,z)$ — excitation par les photons **diffus**
 - $\eta\,\mu_{af}\,F_0\,e^{-\mu_{tx} z}\,\delta^{(2)}(\boldsymbol{\rho})$ — excitation par les photons **balistiques**
 
 Résolution — Champ d'Excitation
@@ -78,73 +78,93 @@ $\rho_{m-} = \sqrt{\rho^2+(z+z_{0x}+2z_{bm})^2}$.
 **Contribution diffuse** $\Phi_m^\text{diff}$
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Le terme source $\eta\,\mu_{af}\,\Phi_x(\mathbf{r})$ est distribué dans tout le
-demi-espace. La solution formelle par la méthode de Green 3D est :
+L'émission de fluorescence étant **isotrope**, chaque point source
+$(\rho_0,z_0)$ rayonne de façon égale dans toutes les directions : le terme
+source de l'équation d'émission est un **scalaire** sans dépendance angulaire.
+Combiné à la symétrie cylindrique de la géométrie, cela permet d'écrire
+directement la Green en coordonnées cylindriques $(\rho,z)$.
 
-$$\Phi_m^\text{diff}(\mathbf{r}) = \eta\,\mu_{af}
-\int_0^\infty\!\!\int_{\mathbb{R}^2} G_m(\mathbf{r},\mathbf{r}')\,\Phi_x(\mathbf{r}')\,d^2\rho'\,dz'$$
+Fonction de Green cylindrique $\mathcal{G}_m$
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-où la fonction de Green $G_m$ avec condition aux limites extrapolée est :
-
-.. math::
-
-	G_m(\mathbf{r},\mathbf{r}') = \frac{1}{4\pi D_m}
-	\left[\frac{e^{-|\mathbf{r}-\mathbf{r}'|/\delta_m}}{|\mathbf{r}-\mathbf{r}'|}
-		 -\frac{e^{-|\mathbf{r}-\bar{\mathbf{r}}'|/\delta_m}}{|\mathbf{r}-\bar{\mathbf{r}}'|}
-	\right], \qquad \bar{\mathbf{r}}' = (x',y',-(z'+2z_{bm}))
-
-**Pourquoi cette intégrale n'a pas de forme explicite dans l'espace réel.**
-Il pourrait sembler naturel d'appliquer l'identité de convolution de Yukawa
-(valable dans tout $\mathbb{R}^3$) :
+La Green cylindrique $\mathcal{G}_m(\rho,z;\rho_0,z_0)$ est la solution de
+l'équation de diffusion azimutalement symétrique avec source annulaire unitaire
+en $(\rho_0,z_0)$ :
 
 .. math::
 
-	\int_{\mathbb{R}^3} \frac{e^{-|\mathbf{r}-\mathbf{r}'|/\delta_x}}{|\mathbf{r}-\mathbf{r}'|}
-	\cdot \frac{e^{-|\mathbf{r}'-\mathbf{r}_s|/\delta_m}}{|\mathbf{r}'-\mathbf{r}_s|}\,d^3r'
-	= \frac{4\pi\delta_m^2\delta_x^2}{\delta_x^2-\delta_m^2}
-	\left[\frac{e^{-|\mathbf{r}-\mathbf{r}_s|/\delta_m}}{|\mathbf{r}-\mathbf{r}_s|}
-    -\frac{e^{-|\mathbf{r}-\mathbf{r}_s|/\delta_x}}{|\mathbf{r}-\mathbf{r}_s|}\right]
+	-D_m\left[\frac{1}{\rho}\frac{\partial}{\partial\rho}
+	\left(\rho\frac{\partial\mathcal{G}_m}{\partial\rho}\right)
+	+\frac{\partial^2\mathcal{G}_m}{\partial z^2}\right]
+	+\mu_{am}\,\mathcal{G}_m
+	= \frac{\delta(\rho-\rho_0)\,\delta(z-z_0)}{\rho_0}
 
-Cependant, le domaine d'intégration est le **demi-espace** $z' \geq 0$, et non
-$\mathbb{R}^3$. L'identité ne peut donc **pas** être appliquée directement. En effet,
-pour étendre l'intégrale à tout $\mathbb{R}^3$, il faudrait connaître la valeur de
-$\Phi_x(\mathbf{r}')$ pour $z' < 0$, ce qui n'est pas défini par le problème physique.
+avec la condition aux limites extrapolée $\mathcal{G}_m(\rho,-z_{bm};\rho_0,z_0)=0$.
+
+.. note::
+
+	Le facteur $1/\rho_0$ au membre de droite provient de la forme de la mesure
+	en coordonnées cylindriques : une source annulaire de puissance unitaire en
+	$(\rho_0,z_0)$ s'écrit $\delta(\rho-\rho_0)\delta(z-z_0)/(2\pi\rho_0)$
+	intégrée sur $2\pi$ en $\phi$.
+
+Par la transformée de Hankel d'ordre 0 en $\rho$ (qui diagonalise l'opérateur
+$\frac{1}{\rho}\partial_\rho(\rho\partial_\rho)$), $\mathcal{G}_m$ admet la
+représentation :
+
+.. math::
+
+	\mathcal{G}_m(\rho,z;\rho_0,z_0)
+	= \int_0^\infty \tilde{G}_m(s_r,z;z_0)\,
+	  J_0(s_r\rho)\,J_0(s_r\rho_0)\,s_r\,ds_r
+
+$$\tilde{G}_m(s_r,z;z_0)
+= \frac{e^{-\alpha_m|z-z_0|}-e^{-\alpha_m(z+z_0+2z_{bm})}}{2\alpha_m D_m},
+\qquad \alpha_m = \sqrt{s_r^2+\frac{1}{\delta_m^2}}$$
+
+Intégrale de convolution cylindrique
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+La solution s'écrit alors comme une convolution dans le demi-plan $(\rho,z)$ :
+
+.. math::
+
+	\Phi_m^\text{diff}(\rho,z) = \eta\,\mu_{af}
+	\int_0^\infty\!\!\int_0^\infty
+	\mathcal{G}_m(\rho,z;\rho_0,z_0)\,\Phi_x(\rho_0,z_0)\,\rho_0\,d\rho_0\,dz_0
 
 .. solution::
 
-   Plus précisément, en substituant $G_m = G_m^\infty - G_m^\infty(\cdot,\bar{\mathbf{r}}')$
-   et en développant le produit avec $\Phi_x$, on obtient quatre intégrales de la forme :
+	En substituant la représentation de Hankel de $\mathcal{G}_m$ et en
+	intervertissant les intégrations (Fubini) :
 
-   
-	.. math::
-		I_{ij} = \int_0^\infty\!\!\int_{\mathbb{R}^2}
-		\frac{e^{-|\mathbf{r}-\mathbf{r}'|_i/\delta_m}}{|\mathbf{r}-\mathbf{r}'|_i}\,
-		\frac{e^{-|\mathbf{r}'-\mathbf{r}_j|/\delta_x}}{|\mathbf{r}'-\mathbf{r}_j|}\,d^3r'
+	$$\Phi_m^\text{diff}(\rho,z) = \eta\,\mu_{af}
+	\int_0^\infty \left[
+	\int_0^\infty \tilde{G}_m(s_r,z;z_0)
+	\underbrace{\int_0^\infty \Phi_x(\rho_0,z_0)\,J_0(s_r\rho_0)\,\rho_0\,d\rho_0}_{=\;\tilde{\Phi}_x(s_r,z_0)}
+	dz_0\right] J_0(s_r\rho)\,s_r\,ds_r$$
 
-   avec $(i,j) \in \{+,-\}\times\{+,-\}$ et $z'$ borné à $[0,+\infty)$.
-   L'intégration transverse sur $(\rho',\phi')$ se fait analytiquement par transformée
-   de Hankel, mais l'intégrale résiduelle en $z'$ ne se simplifie pas en une fonction
-   élémentaire. La forme analytique explicite n'existe que dans l'espace de Fourier
-   (transformée de Hankel en $s_r$), qui est précisément ce que calcule la méthode de
-   Kienle (:doc:`09_da_2d_kienle_avec_fluo`).
+	On reconnaît la transformée de Hankel inverse de $\tilde{\Phi}_m^\text{diff}$.
 
-**Résultat sous forme d'intégrale 1D.** En appliquant la transformée de Hankel en
-$\rho$, le produit de convolution transverse se factorise et l'on obtient l'intégrale
-1D en $z'$ :
+**Résultat dans l'espace de Fourier–Hankel :**
 
 .. math::
 
+	\boxed{
 	\tilde{\Phi}_m^\text{diff}(s_r,z)
 	= \frac{\eta\,\mu_{af}}{D_m}\int_0^\infty
-	  \tilde{G}_m(s_r,z,z')\,\tilde{\Phi}_x(s_r,z')\,dz'
+	  \tilde{G}_m(s_r,z;z_0)\,\tilde{\Phi}_x(s_r,z_0)\,dz_0
+	}
 
-avec :math:`\tilde{G}_m(s_r,z,z') = \dfrac{e^{-\alpha_m|z-z'|}-e^{-\alpha_m(z+z'+2z_{bm})}}{2\alpha_m D_m}`,
-$\alpha_m = \sqrt{s_r^2+1/\delta_m^2}$, et $\tilde{\Phi}_x(s_r,z')$ donné par
-:doc:`08_da_2d_kienle_sans_fluo`.
+$\tilde{\Phi}_x(s_r,z_0)$ est la transformée de Hankel de $\Phi_x(\cdot,z_0)$,
+donnée par :doc:`08_da_2d_kienle_sans_fluo`. Cette intégrale 1D en $z_0$ est
+calculée **analytiquement** dans la méthode de Kienle
+(:doc:`09_da_2d_kienle_avec_fluo`). Le retour en espace réel s'effectue par
+transformée de Hankel inverse :
 
-Cette intégrale est calculée **analytiquement** dans la méthode de Kienle
-(:doc:`09_da_2d_kienle_avec_fluo`), ou **numériquement** en $z'$ puis inversée par
-transformée de Hankel numérique pour obtenir $\Phi_m^\text{diff}(\rho,z)$.
+$$\Phi_m^\text{diff}(\rho,z)
+= \int_0^\infty \tilde{\Phi}_m^\text{diff}(s_r,z)\,J_0(s_r\rho)\,s_r\,ds_r$$
+
 
 Solution Totale
 ~~~~~~~~~~~~~~~~
@@ -156,28 +176,101 @@ Solution Totale
 Réflectance de Fluorescence en $z = 0$
 ----------------------------------------
 
-La réflectance d'émission mesurable en surface est :
+La réflectance (flux sortant en $-z$) est :
 
-$$R_m(\rho) = \left.-D_m\,\frac{\partial\Phi_m}{\partial z}\right|_{z=0}
+$$R_m(\rho) = D_m\,\frac{\partial\Phi_m}{\partial z}\bigg|_{z=0}
 = R_m^\text{balist}(\rho) + R_m^\text{diff}(\rho)$$
 
-**Contribution balistique** (forme analytique explicite) :
+car $\partial_z\Phi_m|_{z=0} > 0$ (la fluence croît de la surface vers la source).
+
+Noyau de réflectance cylindrique $\mathcal{K}_m$
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+En passant la dérivée sous l'intégrale de convolution :
+
+$$R_m^\text{diff}(\rho) = \eta\,\mu_{af}
+\int_0^\infty\!\!\int_0^\infty
+\underbrace{D_m\frac{\partial\mathcal{G}_m}{\partial z}\bigg|_{z=0}}_{\mathcal{K}_m(\rho\,;\rho_0,z_0)}
+\Phi_x(\rho_0,z_0)\,\rho_0\,d\rho_0\,dz_0$$
+
+Le noyau $\mathcal{K}_m$ est la dérivée en $z=0$ de la Green cylindrique.
+En dérivant terme à terme l'intégrale azimutale de $\mathcal{G}_m$, avec
+
+$$\frac{\partial R_\pm}{\partial z}\bigg|_{z=0}
+= \frac{z \mp z_0}_{\text{signe}}{\big/R_\pm}\bigg|_{z=0}
+= \begin{cases}-z_0/R_+ \\ +(z_0+2z_{bm})/R_-\end{cases}$$
+
+et $\partial_z(e^{-R/\delta}/R) = (\partial_z R)(-1/\delta-1/R)(e^{-R/\delta}/R)$, on obtient :
 
 .. math::
 
-	R_m^\text{balist}(\rho)
+	\mathcal{K}_m(\rho\,;\rho_0,z_0)
+	= \frac{1}{4\pi}\int_0^{2\pi}
+	\left[
+	  \frac{z_0\left(1+R_+/\delta_m\right)}{R_+^3}\,e^{-R_+/\delta_m}
+	+ \frac{(z_0+2z_{bm})\left(1+R_-/\delta_m\right)}{R_-^3}\,e^{-R_-/\delta_m}
+	\right]d\phi_0
+
+avec les distances source–observation en $z=0$ :
+
+$$R_+ = \sqrt{\rho^2+\rho_0^2-2\rho\rho_0\cos\phi_0+z_0^2}$$
+$$R_- = \sqrt{\rho^2+\rho_0^2-2\rho\rho_0\cos\phi_0+(z_0+2z_{bm})^2}$$
+
+L'intégrale azimutale sur $\phi_0$ ne se simplifie pas en général
+(intégrales elliptiques pour $\rho_0\neq 0$) ; elle est évaluée numériquement.
+
+.. note::
+
+   Pour $\rho_0=0$ (source sur l'axe), $R_\pm$ est indépendant de $\phi_0$
+   et l'intégrale donne $2\pi$, ce qui redonne exactement le noyau
+   de $R_m^\text{balist}$ ci-dessous.
+
+Réflectance balistique
+~~~~~~~~~~~~~~~~~~~~~~~
+
+La source balistique est sur l'axe ($\rho_0=0$, $z_0=z_{0x}$),
+l'intégrale azimutale vaut $2\pi$ et on applique
+l'approximation $\mu_{tx}\,e^{-\mu_{tx}z_0}\approx\delta(z_0-z_{0x})$ :
+
+.. math::
+
+	\boxed{R_m^\text{balist}(\rho)
 	= \frac{\eta\,\mu_{af}\,F_0}{4\pi\,\mu_{tx}}
 	\left[
-	  \frac{z_{0x}}{\rho_{m+}^3}\left(1+\frac{\rho_{m+}}{\delta_m}\right)e^{-\rho_{m+}/\delta_m}
-	+ \frac{z_{0x}+2z_{bm}}{\rho_{m-}^3}\left(1+\frac{\rho_{m-}}{\delta_m}\right)e^{-\rho_{m-}/\delta_m}
-	\right]
+	  \frac{z_{0x}\left(1+\rho_{m+}/\delta_m\right)}{\rho_{m+}^3}\,e^{-\rho_{m+}/\delta_m}
+	+ \frac{(z_{0x}+2z_{bm})\left(1+\rho_{m-}/\delta_m\right)}{\rho_{m-}^3}\,e^{-\rho_{m-}/\delta_m}
+	\right]}
 
-**Contribution diffuse** (calcul par transformée de Hankel inverse, voir :doc:`09_da_2d_kienle_avec_fluo`) :
+avec $\rho_{m+} = \sqrt{\rho^2+z_{0x}^2}$,
+$\rho_{m-} = \sqrt{\rho^2+(z_{0x}+2z_{bm})^2}$.
+
+Réflectance diffuse
+~~~~~~~~~~~~~~~~~~~~
+
+La réflectance diffuse complète est une **double intégrale en espace réel** :
 
 .. math::
-	R_m^\text{diff}(\rho) = \frac{1}{2\pi}\int_0^\infty \tilde{R}_m^\text{diff}(s_r)\,J_0(s_r\rho)\,s_r\,ds_r
 
-C'est la grandeur inversée en FDOT pour reconstruire $\mu_{af}(\mathbf{r})$.
+	\boxed{
+	R_m^\text{diff}(\rho)
+	= \frac{\eta\,\mu_{af}}{4\pi}
+	\int_0^\infty\!\!\int_0^\infty
+	\Phi_x(\rho_0,z_0)
+	\int_0^{2\pi}\!\!
+	\left[
+	  \frac{z_0(1+R_+/\delta_m)}{R_+^3}e^{-R_+/\delta_m}
+	+ \frac{(z_0+2z_{bm})(1+R_-/\delta_m)}{R_-^3}e^{-R_-/\delta_m}
+	\right]
+	d\phi_0\;\rho_0\,d\rho_0\,dz_0
+	}
+
+$\Phi_x(\rho_0,z_0)$ est donné par :eq:`phi_x`. La réflectance totale est :
+
+.. math::
+
+	R_m(\rho) = R_m^\text{balist}(\rho) + R_m^\text{diff}(\rho)
+
+C'est la grandeur inversée en FDOT pour reconstruire $\mu_{af}(\rho_0,z_0)$.
 
 Extension Temporelle
 ---------------------
@@ -186,7 +279,7 @@ En régime temporel, l'équation d'émission devient :
 
 $$\frac{1}{c}\partial_t\Phi_m - D_m\nabla^2\Phi_m + \mu_{am}\Phi_m
 = \frac{\eta\,\mu_{af}}{\tau_f}\int_{-\infty}^{t}e^{-(t-t')/\tau_f}
-\!\left[\Phi_x(\mathbf{r},t') + F_0\,e^{-\mu_{tx} z}\,\delta(t')\,\delta^{(2)}(\boldsymbol{\rho})\right]dt'$$
+\!\left[\Phi_x(\rho,z,t') + F_0\,e^{-\mu_{tx} z}\,\delta(t')\,\delta^{(2)}(\boldsymbol{\rho})\right]dt'$$
 
 En domaine de Laplace ($s = j\omega$), le terme source devient
 $\frac{\eta\,\mu_{af}}{1+s\tau_f}\!\left[\tilde\Phi_x + F_0\,e^{-\mu_{tx}z}\,\delta^{(2)}\right]$,
@@ -198,4 +291,4 @@ et l'on remplace $\mu_a \leftarrow \mu_a + s/c$ dans chaque équation.
 
    :doc:`06_da_2d_dipoles_sans_fluo` — cas 2D sans fluorescence.
 
-   :doc:`09_da_2d_kienle_avec_fluo` — résolution analytique explicite via fréquences spatiales.
+   :doc:`09_da_2d_kienle_avec_fluo` — résolution analytique fermée via fréquences spatiales.
