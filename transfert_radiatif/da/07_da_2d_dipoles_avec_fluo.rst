@@ -196,10 +196,12 @@ $$R_m^\text{diff}(\rho) = \eta\,\mu_{af}
 Le noyau $\mathcal{K}_m$ est la dérivée en $z=0$ de la Green cylindrique.
 En dérivant terme à terme l'intégrale azimutale de $\mathcal{G}_m$, avec
 
-$$\frac{\partial R_+}{\partial z}\bigg|_{z=0}
-= \frac{z - z_0}{R_+}\bigg|_{z=0} = \frac{-z_0}{R_+}, \qquad
-\frac{\partial R_-}{\partial z}\bigg|_{z=0}
-= \frac{z + z_0 + 2z_{bm}}{R_-}\bigg|_{z=0} = \frac{z_0+2z_{bm}}{R_-}$$
+.. math::
+
+	\frac{\partial R_+}{\partial z}\bigg|_{z=0}
+	= \frac{z - z_0}{R_+}\bigg|_{z=0} = \frac{-z_0}{R_+}, \qquad
+	\frac{\partial R_-}{\partial z}\bigg|_{z=0}
+	= \frac{z + z_0 + 2z_{bm}}{R_-}\bigg|_{z=0} = \frac{z_0+2z_{bm}}{R_-}
 
 et $\dfrac{\partial}{\partial z}\dfrac{e^{-R/\delta}}{R} = \dfrac{\partial R}{\partial z}\left(-\dfrac{1}{\delta R}-\dfrac{1}{R^2}\right)e^{-R/\delta}$, on obtient :
 
