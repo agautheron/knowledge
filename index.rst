@@ -67,7 +67,7 @@ Knowledge Hub
        </div>
      </a>
 
-     <a class="course-card" href="nvidia/clara_agx/index.html">
+     <a class="course-card" href="clara_agx/index.html">
        <div class="course-card__header course-card__header--nvidia">
          <span class="course-card__badge">NVIDIA / Embarqué</span>
        </div>
