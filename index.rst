@@ -1,6 +1,6 @@
 .. _home:
 
-Cours — RT Models
+Knowledge Hub
 =================
 
 .. toctree::
@@ -9,7 +9,13 @@ Cours — RT Models
 
    Accueil <self>
    transfert_radiatif/index
+
+.. toctree::
+   :hidden:
+   :caption: Matériel & Systèmes
+
    verilog_fpga/index
+   clara_agx/index
 
 .. toctree::
    :hidden:
@@ -58,6 +64,26 @@ Cours — RT Models
            <li>Diviseur 20 MHz → 1,25 MHz — testbench</li>
          </ul>
          <span class="course-card__cta">Accéder au cours →</span>
+       </div>
+     </a>
+
+     <a class="course-card" href="nvidia/clara_agx/index.html">
+       <div class="course-card__header course-card__header--nvidia">
+         <span class="course-card__badge">NVIDIA / Embarqué</span>
+       </div>
+       <div class="course-card__body">
+         <h2 class="course-card__title">NVIDIA Clara AGX</h2>
+         <p class="course-card__desc">
+           Mise à jour et flash de la plateforme Clara AGX Developer Kit
+           (Jetson AGX Xavier + RTX 6000) via NVIDIA SDK Manager depuis
+           Windows avec VirtualBox.
+         </p>
+         <ul class="course-card__topics">
+           <li>Configuration VirtualBox + USB 3.0 passthrough</li>
+           <li>Flash Holopack via SDK Manager</li>
+           <li>Basculement iGPU / dGPU (RTX 6000)</li>
+         </ul>
+         <span class="course-card__cta">Accéder au guide →</span>
        </div>
      </a>
 
